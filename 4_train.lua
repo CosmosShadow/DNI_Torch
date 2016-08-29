@@ -10,14 +10,16 @@ function train()
     local total_error= 0
 
     for t = 1, global_iters_each_epochs do
-        local inputs, targets = load_input_target_train()
+        local inputs, targets, onehot_labels = load_input_target_train()
 
         if global_use_cuda then
             inputs = inputs:cuda()
             targets = targets:cuda()
+            onehot_labels = onehot_labels:cuda()
         else
             inputs = inputs:float()
             targets = targets:float()
+            onehot_labels = onehot_labels:float()
         end
 
         local feval = function(x)
@@ -25,18 +27,10 @@ function train()
             gradParameters:zero()
 
             -- forward, backward
-            local outputs = model:forward(inputs)
+            local outputs = model:forward({inputs, onehot_labels})
             local error = criterion:forward(outputs, targets)
             local grad = criterion:backward(outputs, targets)
-            model:backward(inputs, grad)
-
-            -- -- 
-            -- inputs = inputs:float()
-            -- max_value, predictions = torch.max(outputs:float(), 2)
-            -- for i=1,inputs:size(1) do
-            --     image.save('output/'..i..'_'..predictions[i][1] ..'.png', inputs[i])
-            -- end
-            -- os.exit()
+            model:backward({inputs, onehot_labels}, grad)
 
             -- normalize
             local batchSize = inputs:size(1)
