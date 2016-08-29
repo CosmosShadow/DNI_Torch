@@ -14,7 +14,6 @@ function load_input_target_train()
 
     local inputs = torch.zeros(global_batch_size, 32*32)
     local labels = torch.zeros(global_batch_size)
-    local onehot_labels = torch.zeros(global_batch_size, 10)
 
     for i=1,global_batch_size do
         local tsize = data_trian.data:size(1)
@@ -24,13 +23,12 @@ function load_input_target_train()
         inputs[i]:copy(img)
 
         labels[i] = data_trian.labels[random_index]
-        onehot_labels[i][labels[i]] = 1
     end
 
     -- 归一化处理
     inputs = inputs:div(255.0):add(-0.5)
 
-    return inputs, labels, onehot_labels
+    return inputs, labels
 end
 
 

@@ -7,35 +7,24 @@ function DNI:__init(src_model, M, M_criterion)
    self.M_criterion = M_criterion
 end
 
-function DNI:updateOutput(inputTable)
-   assert(torch.type(inputTable) == 'table')
-   assert(#inputTable == 2)
-   local input = inputTable[1]
-   local label = inputTable[2]
-
+function DNI:updateOutput(input)
    self.output = self.src_model:forward(input)
 
    -- Synthetic Gradients
    if label ~= nil then
-      SyntheticGradients = self.M:forward({self.output, label})
-      self.gradInput = self.src_model:backward(input, SyntheticGradients)
+      self.SyntheticGradients = self.M:forward(self.output)
+      self.gradInput = self.src_model:backward(input, self.SyntheticGradients)
    end
-   
-   return {self.output, label}
+
+   return self.output
 end
 
-function DNI:updateGradInput(inputTable, gradOutputTable)
-   assert(torch.type(inputTable) == 'table')
-   assert(torch.type(gradOutputTable) == 'table')
-   assert(#inputTable == 2)
-   local input = inputTable[1]
-   local label = inputTable[2]
-
+function DNI:updateGradInput(input, gradOutput)
    -- M learn
    if label ~= nil then
-      local M_grad = self.M_criterion:backward(self.gradInput, gradOutputTable[1])
-      self.M:backward(inputTable, M_grad)
+      local M_grad = self.M_criterion:backward(self.SyntheticGradients, gradOutput)
+      self.M:backward(self.output, M_grad)
    end
 
-   return {self.gradInput, nil}
+   return self.gradInput
 end

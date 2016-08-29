@@ -10,16 +10,14 @@ function train()
     local total_error= 0
 
     for t = 1, global_iters_each_epochs do
-        local inputs, targets, onehot_labels = load_input_target_train()
+        local inputs, targets = load_input_target_train()
 
         if global_use_cuda then
             inputs = inputs:cuda()
             targets = targets:cuda()
-            onehot_labels = onehot_labels:cuda()
         else
             inputs = inputs:float()
             targets = targets:float()
-            onehot_labels = onehot_labels:float()
         end
 
         local feval = function(x)
@@ -27,10 +25,10 @@ function train()
             gradParameters:zero()
 
             -- forward, backward
-            local outputs = model:forward({inputs, onehot_labels})
+            local outputs = model:forward(inputs)
             local error = criterion:forward(outputs[1], targets)
             local grad = criterion:backward(outputs[1], targets)
-            model:backward({inputs, onehot_labels}, {grad, nil})
+            model:backward(inputs, grad)
 
             -- normalize
             local batchSize = inputs:size(1)
