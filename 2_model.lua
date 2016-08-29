@@ -1,14 +1,14 @@
--- model cnn_location
+-- model
 
 local function createModel()
     -- 模型
     local model = nn.Sequential()
     model:add(nn.View(32*32):setNumInputDims(3))
-    model:add(nn.Linear(32*32, 256))
+    model:add(nn.DNI(nn.Linear(32*32, 256), nil))
     model:add(nn.ReLU(true))
-    model:add(nn.Linear(256, 64))
+    model:add(nn.DNI(nn.Linear(256, 64), nil))
     model:add(nn.ReLU(true))
-    model:add(nn.Linear(64, 10))
+    model:add(nn.DNI(nn.Linear(64, 10), nil))
     model:add(nn.LogSoftMax())
 
     -- 初始化参数

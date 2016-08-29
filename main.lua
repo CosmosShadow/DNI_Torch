@@ -9,6 +9,7 @@ require 'optim'
 require 'image'
 
 require 'Utils'
+dofile 'DNI.lua'
 dofile 'method.lua'
 dofile '0_utils.lua'
 dofile '0_config.lua'
