@@ -26,9 +26,13 @@ function train()
 
             -- forward, backward
             local outputs = model:forward(inputs)
-            local error = criterion:forward(outputs[1], targets)
-            local grad = criterion:backward(outputs[1], targets)
+            local error = criterion:forward(outputs, targets)
+            local grad = criterion:backward(outputs, targets)
             model:backward(inputs, grad)
+
+            -- print(outputs)
+            -- print(error)
+            -- print(grad)
 
             -- normalize
             local batchSize = inputs:size(1)
