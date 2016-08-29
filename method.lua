@@ -18,7 +18,7 @@ function load_global_parameters()
 	global_train_count = 100000000
 
 	-- 训练轮次控制
-	global_iters_each_epochs = 50
+	global_iters_each_epochs = 200
 	global_batch_size = 64
 
 	-- 参数保存、加载
@@ -30,7 +30,7 @@ end
 
 function load_method_sgd()
 	optimState = {
-		learningRate = 0.01,
+		learningRate = 0.0001,
 		learningRateDecay = 0,
 		weightDecay = 0,
 		momentum = 0.9,
