@@ -28,9 +28,9 @@ function train()
 
             -- forward, backward
             local outputs = model:forward({inputs, onehot_labels})
-            local error = criterion:forward(outputs, targets)
-            local grad = criterion:backward(outputs, targets)
-            model:backward({inputs, onehot_labels}, grad)
+            local error = criterion:forward(outputs[1], targets)
+            local grad = criterion:backward(outputs[1], targets)
+            model:backward({inputs, onehot_labels}, {grad, nil})
 
             -- normalize
             local batchSize = inputs:size(1)

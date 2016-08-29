@@ -17,9 +17,7 @@ function DNI:updateOutput(inputTable)
 
    -- Synthetic Gradients
    if label ~= nil then
-      SyntheticGradients = self.M:forward(self.output)
-      print(SyntheticGradients:size())
-      print(input:size())
+      SyntheticGradients = self.M:forward({self.output, label})
       self.gradInput = self.src_model:backward(input, SyntheticGradients)
    end
    
@@ -35,7 +33,7 @@ function DNI:updateGradInput(inputTable, gradOutputTable)
 
    -- M learn
    if label ~= nil then
-      local M_grad = self.M_criterion:backward(self.gradInput, gradOutput[1])
+      local M_grad = self.M_criterion:backward(self.gradInput, gradOutputTable[1])
       self.M:backward(inputTable, M_grad)
    end
 
