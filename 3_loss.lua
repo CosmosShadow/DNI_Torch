@@ -1,0 +1,3 @@
+-- loss
+
+criterion = nn.ClassNLLCriterion()
