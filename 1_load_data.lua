@@ -12,7 +12,7 @@ local data_test = torch.load(data_test_path, 'ascii')
 
 function load_input_target_train()
 
-    local inputs = torch.zeros(global_batch_size, 1, 32, 32)
+    local inputs = torch.zeros(global_batch_size, 32*32)
     local labels = torch.zeros(global_batch_size)
     local onehot_labels = torch.zeros(global_batch_size, 10)
 
