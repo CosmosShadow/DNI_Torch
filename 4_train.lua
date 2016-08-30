@@ -30,9 +30,9 @@ function train()
             local grad = criterion:backward(outputs, targets)
             model:backward(inputs, grad)
 
-            -- print(outputs)
+            -- print(outputs[1])
+            -- print(grad[1])
             -- print(error)
-            -- print(grad)
 
             -- normalize
             local batchSize = inputs:size(1)

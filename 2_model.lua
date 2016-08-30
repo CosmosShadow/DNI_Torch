@@ -21,13 +21,23 @@ local function createModel()
 
     -- 模型
     local model = nn.Sequential()
-    model:add(nn.DNI(nn.Sequential():add(nn.Linear(32*32, 256)):add(nn.ReLU()), M1, nn.MSECriterion()))
-    model:add(nn.DNI(nn.Sequential():add(nn.Linear(256, 64)):add(nn.ReLU()), M2, nn.MSECriterion()))
-    model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion()))
+
+    -- 全DNI
+    -- model:add(nn.DNI(nn.Sequential():add(nn.Linear(32*32, 256)):add(nn.ReLU()), M1, nn.MSECriterion()))
+    -- model:add(nn.DNI(nn.Sequential():add(nn.Linear(256, 64)):add(nn.ReLU()), M2, nn.MSECriterion()))
+    -- model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion()))
+
+    -- 一个DNI
+    model:add(nn.Linear(32*32, 256))
+    model:add(nn.ReLU())
+    model:add(nn.Linear(256, 64))
+    model:add(nn.ReLU())
+    -- model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion()))
+    model:add(nn.Linear(64, 10))
 
     -- 初始化参数
     for k, param in ipairs(model:parameters()) do
-        param:normal(-0.01, 0.01)
+        param:uniform(-0.1, 0.1)
     end
 
     return model
