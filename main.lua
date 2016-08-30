@@ -1,14 +1,11 @@
 ---------------------------------------------------------------------------------
 print("==> Loading required libraries")
 require 'dp'
-require 'rnn'
-require 'stn'
 require 'torch'
 require 'xlua'
 require 'optim'
 require 'image'
 
-require 'Utils'
 dofile 'DNI.lua'
 dofile 'method.lua'
 dofile '0_utils.lua'
@@ -20,7 +17,7 @@ torch.setnumthreads(1)
 torch.manualSeed(123)
 
 -- 初始化method、全局参数
-optim.adjust_method()
+load_method()
 
 -- 加载GPU模块
 if global_use_cuda then
@@ -64,8 +61,7 @@ while epoch < 1000000000 do
     print("\nepoch # " .. epoch..'  '..time..'  ')
 
     -- 训练
-    local error = train()
-    optim.adjust_method(error)
+    train()
 
     -- 直接保存模型
     if epoch%global_save_parameter_iter == 0 then
