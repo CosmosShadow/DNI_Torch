@@ -6,17 +6,11 @@ require 'optim'
 require 'image'
 
 dofile 'DNI.lua'
-dofile 'method.lua'
-dofile '0_utils.lua'
 dofile '0_config.lua'
-
 
 print("==> Setting: thread, seed")
 torch.setnumthreads(1)
 torch.manualSeed(123)
-
--- 全局参数
-load_method()
 
 -- 加载GPU模块
 if global_use_cuda then
@@ -26,16 +20,9 @@ end
 
 print("==> Loading scripts and model")
 dofile '1_load_data.lua'
+dofile '2_model.lua'
 dofile '3_loss.lua'
 dofile '4_train.lua'
-
--- 加载模型
-if global_trained_parameter_path and #(global_trained_parameter_path)>0 then
-    print('==> load model: '..global_trained_parameter_path)
-    model = torch.load(global_trained_parameter_path)
-else
-    dofile '2_model.lua'
-end
 
 -- GPU vs CPU
 if global_use_cuda then
