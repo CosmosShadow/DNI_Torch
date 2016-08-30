@@ -22,7 +22,7 @@ global_batch_size = 64
 
 -- 优化方法
 optimState = {
-	learningRate = 1e-7,
+	learningRate = 1e-2,
 	learningRateDecay = 0,
 	weightDecay = 0,
 	momentum = 0.9,

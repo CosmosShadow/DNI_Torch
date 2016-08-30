@@ -27,7 +27,7 @@ local function createModel()
 
     -- 初始化参数
     for k, param in ipairs(model:parameters()) do
-        param:uniform(-0.01, 0.01)
+        param:normal(-0.01, 0.01)
     end
 
     return model

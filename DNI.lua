@@ -19,8 +19,12 @@ end
 
 function DNI:updateGradInput(input, gradOutput)
    -- M learn
+   local M_error = self.M_criterion:forward(self.SyntheticGradients, gradOutput)
    local M_grad = self.M_criterion:backward(self.SyntheticGradients, gradOutput)
    self.M:backward(self.output, M_grad)
+   -- print(M_error)
+
+   -- self.gradInput = self.src_model:backward(input, gradOutput)
 
    return self.gradInput
 end
