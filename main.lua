@@ -2,7 +2,6 @@
 print("==> Loading required libraries")
 require 'dp'
 require 'torch'
-require 'xlua'
 require 'optim'
 require 'image'
 
@@ -16,7 +15,7 @@ print("==> Setting: thread, seed")
 torch.setnumthreads(1)
 torch.manualSeed(123)
 
--- 初始化method、全局参数
+-- 全局参数
 load_method()
 
 -- 加载GPU模块
@@ -27,7 +26,6 @@ end
 
 print("==> Loading scripts and model")
 dofile '1_load_data.lua'
-
 dofile '3_loss.lua'
 dofile '4_train.lua'
 
@@ -62,15 +60,6 @@ while epoch < 1000000000 do
 
     -- 训练
     train()
-
-    -- 直接保存模型
-    if epoch%global_save_parameter_iter == 0 then
-        model:float()
-        local parameters_path = global_parameter_store_path..'/model_'..time..'.t7'
-        torch.save(parameters_path, model)
-        print('\nsave to '..parameters_path)
-        if global_use_cuda then model:cuda() end
-    end
 
 end
 

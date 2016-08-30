@@ -14,8 +14,6 @@ function DNI:updateOutput(input)
    self.SyntheticGradients = self.M:forward(self.output)
    self.gradInput = self.src_model:backward(input, self.SyntheticGradients)
 
-   -- print(self.SyntheticGradients)
-
    return self.output
 end
 

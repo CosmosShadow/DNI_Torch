@@ -8,7 +8,7 @@ DNI(Decoupled Neural Interfaces using Synthetic Gradients) implementation with T
 
 ### Data
 [https://s3.amazonaws.com/torch7/data/mnist.t7.tgz](https://s3.amazonaws.com/torch7/data/mnist.t7.tgz)    
-
+下载解压到新建文件夹mnist下面
 <br/>
 
 ### Working...
