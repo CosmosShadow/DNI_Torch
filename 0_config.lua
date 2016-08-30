@@ -10,11 +10,11 @@ global_GPU_device = 1	-- which one GPU
 -- count, epoch, batch
 global_train_count = 100000000
 global_iters_each_epochs = 500
-global_batch_size = 64
+global_batch_size = 32
 
 -- optimizing setting
 optimState = {
-	learningRate = 10,
+	learningRate = 2e-3,
 	learningRateDecay = 0,
 	weightDecay = 0,
 	momentum = 0.9,
