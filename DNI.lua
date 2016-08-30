@@ -28,7 +28,7 @@ function DNI:updateGradInput(input, gradOutput)
    -- print(M_error)
 
    if M_error < 1 then
-      self.current_M_confidence = (1 - M_error)*0.001
+      self.current_M_confidence = (1 - M_error)*0.0003
    else
       self.current_M_confidence = 0
    end
