@@ -1,3 +1,3 @@
 -- loss
 
-criterion = nn.ClassNLLCriterion()
+criterion = nn.CrossEntropyCriterion()
