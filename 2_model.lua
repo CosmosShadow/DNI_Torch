@@ -21,15 +21,14 @@ local function createModel()
     -- M3:add(nn.Linear(10, 10))
     -- M3:add(nn.Tanh())
 
-    -- 模型
     local model = nn.Sequential()
 
-    -- 全DNI
+    -- full DNI
     -- model:add(nn.DNI(nn.Sequential():add(nn.Linear(32*32, 256)):add(nn.ReLU()), M1, nn.MSECriterion()))
     -- model:add(nn.DNI(nn.Sequential():add(nn.Linear(256, 64)):add(nn.ReLU()), M2, nn.MSECriterion()))
     -- model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion()))
 
-    -- 一个DNI
+    -- one DNI
     model:add(nn.Linear(32*32, 256))
     model:add(nn.ReLU())
     model:add(nn.Linear(256, 64))
@@ -37,7 +36,7 @@ local function createModel()
     model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion()))
     -- model:add(nn.Linear(64, 10))
 
-    -- 初始化参数
+    -- init parameters
     for k, param in ipairs(model:parameters()) do
         param:uniform(-0.1, 0.1)
     end

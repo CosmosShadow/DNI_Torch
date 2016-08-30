@@ -12,7 +12,7 @@ print("==> Setting: thread, seed")
 torch.setnumthreads(1)
 torch.manualSeed(123)
 
--- 加载GPU模块
+-- load GPU package
 if global_use_cuda then
     require 'cutorch'
     require 'cunn'
@@ -45,9 +45,7 @@ while epoch < 1000000000 do
     local time = os.date("%Y_%m_%d_%H_%M_%S", os.time())
     print("\nepoch # " .. epoch..'  '..time..'  ')
 
-    -- 训练
     train()
-
 end
 
 

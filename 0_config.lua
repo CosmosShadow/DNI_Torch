@@ -1,26 +1,18 @@
--- input
-base_size = 32
-image_channel = 1
-image_size = 64
-noisy_size = 6
+-- config
 
--- 分类
+-- class
 classes = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
 -- GPU
 global_use_cuda = true
 global_GPU_device = 1	-- which one GPU	
 
-bPrintInnerError = false
-
--- 总的训练数据
+-- count, epoch, batch
 global_train_count = 100000000
-
--- 训练轮次控制
 global_iters_each_epochs = 500
 global_batch_size = 64
 
--- 优化方法
+-- optimizing setting
 optimState = {
 	learningRate = 10,
 	learningRateDecay = 0,
