@@ -9,4 +9,6 @@ DNI(Decoupled Neural Interfaces using Synthetic Gradients) implementation with T
 
 download and put in directory /mnist/
 
-### Working...
+### Usage
+
+	th main.lua
