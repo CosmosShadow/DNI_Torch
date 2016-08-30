@@ -15,8 +15,10 @@ local function createModel()
 
     local M3 = nn.Sequential()
     M3:add(nn.Linear(10, 10))
-    M3:add(nn.ReLU())
-    M3:add(nn.Linear(10, 10))
+    -- M3:add(nn.ReLU())
+    -- M3:add(nn.Linear(10, 10))
+    -- M3:add(nn.ReLU())
+    -- M3:add(nn.Linear(10, 10))
     -- M3:add(nn.Tanh())
 
     -- 模型
@@ -32,8 +34,8 @@ local function createModel()
     model:add(nn.ReLU())
     model:add(nn.Linear(256, 64))
     model:add(nn.ReLU())
-    -- model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion()))
-    model:add(nn.Linear(64, 10))
+    model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion()))
+    -- model:add(nn.Linear(64, 10))
 
     -- 初始化参数
     for k, param in ipairs(model:parameters()) do

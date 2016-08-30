@@ -17,12 +17,12 @@ bPrintInnerError = false
 global_train_count = 100000000
 
 -- 训练轮次控制
-global_iters_each_epochs = 200
+global_iters_each_epochs = 500
 global_batch_size = 64
 
 -- 优化方法
 optimState = {
-	learningRate = 1e-2,
+	learningRate = 10,
 	learningRateDecay = 0,
 	weightDecay = 0,
 	momentum = 0.9,
