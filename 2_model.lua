@@ -21,12 +21,6 @@ local function createModel()
     M3:add(nn.BatchNormalization(256))
     M3:add(nn.ReLU())
     M3:add(nn.Linear(256, 10))
-    
-
-    -- M3:add(nn.Linear(10, 10))
-    -- M3:add(nn.ReLU())
-    -- M3:add(nn.Linear(10, 10))
-    -- M3:add(nn.Tanh())
 
     local model = nn.Sequential()
 
@@ -40,7 +34,7 @@ local function createModel()
     model:add(nn.ReLU())
     model:add(nn.Linear(256, 64))
     model:add(nn.ReLU())
-    model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion(), 1e2))
+    model:add(nn.DNI(nn.Linear(64, 10), M3, nn.MSECriterion(), 1e3))
     -- model:add(nn.Linear(64, 10))
 
     -- init parameters
